@@ -1,0 +1,159 @@
+<%= render 'layouts/header', back: true %>
+
+<!-- Listing group -->
+<div class="text-middle" id="postings">
+    <div class="panel-wide">
+        <div class="panel-heading">
+            <strong>
+                Edit existing study
+            </strong>
+        </div>
+
+        <form action="/study/update/<%= @aStudy.id %>" onsubmit="return makeAgeRight()">
+            
+            <!-- Study -->
+            <fieldset class="border p-3">
+                <legend class="col-form-label pt-2 w-auto">Study</legend>
+                <div class="form-group">
+                    <label for="inputTitle" >Title</label>
+                    <input type="text" name="input_title" class="form-control" placeholder="Research Title" value="<%= @aStudy.title %>" required autofocus/>
+                </div>
+                <div class="form-group">
+                    <label for="inputDescription" >Description</label>
+                    <textarea type="text" name="input_description" class="form-control" placeholder="Description" required rows="3"><%= @aStudy.description %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDate">Pay per individual</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" placeholder="Pay" name="input_money" min="0" value="<%= @aStudy.money %>" required />
+                    </div>
+                </div>
+                <fieldset>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="check-ucla" name="input_if_ucla" <%= 'checked' if @aStudy.ucla_students %> />
+                        <label class="custom-control-label" for="check-ucla">
+                            UCLA Students only acceptible as participants
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="check-app" name="input_if_app" <%= 'checked' if @aStudy.mobile_app %> />
+                        <label class="custom-control-label" for="check-app">
+                            Participation is required only on a mobile app
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="check-no-medical" name="input_if_medical" <%= 'checked' if @aStudy.no_medical %> />
+                        <label class="custom-control-label" for="check-no-medical">
+                            Study involves <strong>no</strong> administration of drugs, vaccines or blood draws from participant
+                        </label>
+                    </div>
+                </fieldset>
+            </fieldset>
+            
+            <!-- Researcher -->
+            <fieldset class="border p-3">
+                <legend class="col-form-label pt-2 w-auto">Researcher</legend>                
+                <div class="form-group">
+                    <label for="inputResearcherName" >Researcher Name</label>
+                    <input type="text" name="input_researcher_name" class="form-control" placeholder="Researcher Name"  value="<%= @aStudy.researcher_name %>" required />
+                </div>
+                <div class="form-group">
+                    <label for="inputResearcherName" >Correspondence Email</label>
+                    <input type="email" name="input_researcher_email" class="form-control" placeholder="Correspondence Email"  value="<%= @aStudy.researcher_email %>" required  />
+                </div>
+            </fieldset>
+            
+            <!-- Participant -->
+            <fieldset class="border p-3">
+                <legend class="col-form-label pt-2 w-auto">Participant</legend>                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputAge">Minimum age of participants (inclusive):</label>
+                            <input type="number" name="input_min_age" id="input_min_age" class="form-control" placeholder="Minimum age" min="0" max="81" value="<%= @aStudy.min_age %>" />
+                            <div class="custom-control custom-checkbox pt-1">
+                                <input class="custom-control-input" type="checkbox" id="no-min-age" onchange="minAgeCheck()">
+                                <label class="custom-control-label" for="no-min-age">
+                                    Not applicable
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputAge">Maximum age of participants (inclusive):</label>
+                            <input type="number" name="input_max_age" id="input_max_age" class="form-control" placeholder="Maximum age" min="0" max="81" value="<%= @aStudy.max_age %>" />
+                            <div class="custom-control custom-checkbox pt-1">
+                                <input class="custom-control-input" type="checkbox" id="no-max-age" onchange="maxAgeCheck()">
+                                <label class="custom-control-label" for="no-max-age">
+                                    Not applicable
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <fieldset>
+                    <label class="pt-0">Required:</label>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="input_gender" id="radio-male"
+                            value="male" <%= 'checked' if @aStudy.gender == 'male' %> >
+                        <label class="custom-control-label" for="radio-male">
+                            Only male participants
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="input_gender" id="radio-female"
+                            value="female" <%= 'checked' if @aStudy.gender == 'female' %> >
+                        <label class="custom-control-label" for="radio-female">
+                            Only female participants
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="input_gender" id="radio-unspecified"
+                            value="unspecified" <%= 'checked' if @aStudy.gender == 'unspecified' %> >
+                        <label class="custom-control-label" for="radio-unspecified">
+                            Not Applicable
+                        </label>
+                    </div>
+                </fieldset>
+            </fieldset>
+            
+            <!-- You -->
+            <fieldset class="border p-3">
+                <legend class="col-form-label pt-2 w-auto">You</legend>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputResearcherName" >Submitter Name</label>
+                            <input type="text" name="input_submitter_name" class="form-control" value="<%= current_user.first_name + " " + current_user.last_name %>" readonly  />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputResearcherName" >Submitter Email</label>
+                            <input type="text" name="input_submitter" class="form-control" value="<%= current_user.email %>" readonly  />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <br/>
+
+            <div class="btn-center">
+                <a href="/study/destroy/<%= @aStudy.id %>"><button class="btn btn-danger sharp-border mx-2">
+                        <i class="fa fa-trash"></i>  
+                        Delete posting
+                    </button></a>
+                <input type="submit" class="btn btn-primary sharp-border mx-2" value="Save Changes">
+                <a href="/study/index?message=-no-edit"><button class="btn btn-warning sharp-border mx-2">
+                        <i class="fas fa-eraser"></i> 
+                        Discard Changes
+                    </button></a>
+            </div>
+        </form>
+    </div>
+</div>

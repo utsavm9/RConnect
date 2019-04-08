@@ -1,0 +1,52 @@
+<% if local_assigns[:back] %>
+
+
+    <nav class="navbar navbar-light sharp-border">
+        <!-- Website logo -->
+        <a href="/study/index" class="navbar-brand"><span id="navbar-R">R</span>Connect</a>
+        <form class="form-inline">
+            <a href="/study/index">
+                <button class="btn btn-warning sharp-border" type="submit">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </a>
+        </form>
+    </nav>
+    
+    
+<% else %>
+    
+    <% if current_user %>
+        <nav class="navbar navbar-light sharp-border">
+    <% else %>
+        <nav class="navbar navbar-light sharp-border sticky-top">
+    <% end %>
+
+        <!-- Website logo -->
+        <a href="/study/index" class="navbar-brand"><span id="navbar-R">R</span>Connect</a>
+
+        <!--Login, Sign up and log out-->
+        <form class="form-inline">
+            <% unless current_user %>
+            <a href="/signup">
+                <button class="btn btn-info sharp-border" type="submit">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </a>
+            <a href="/login">
+                <button class="btn btn-success sharp-border" type="submit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </a>
+            <% else %>
+                <a rel="nofollow" data-method="delete" href="/logout">
+                    <button class="btn btn-danger sharp-border" type="submit">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </a>
+            <% end %>
+        </form>
+    </nav>
+    
+    
+<% end %>

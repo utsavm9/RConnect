@@ -1,0 +1,45 @@
+<%= render 'layouts/header', back: true %>
+
+
+<div class="container-fluid" id="jumbotron-wrapper">
+    <!-- THE TEAM -->
+    <div class="jumbotron sharp-border" id="box-color">
+        <div class="row">
+            <div class="header-info text-middle">
+                <h1><mark>The Team</mark> </h1>
+            </div>
+        </div>
+    </div>
+    
+    <!-- The Team members -->
+    <div class="container-fluid" id="postings">
+        <div class="team-block">
+            <div class="team-block__member">
+                <%= image_tag("thomas.jpg", :class => "team-block__img") %>
+                <p class="team-block__name">Thomas Chang</p>
+                <p class="team-block__job"></p>
+            </div>
+            <div class="team-block__member">
+                <%= image_tag("chingyi.jpg", :class => "team-block__img") %>
+                <p class="team-block__name">Chingyi Ie</p>
+                <p class="team-block__job"></p>
+            </div>
+            <div class="team-block__member">
+                <%= image_tag("utsav.jpg", :class => "team-block__img") %>
+                <p class="team-block__name">Utsav Munendra</p>
+                <p class="team-block__job"></p>
+            </div>
+            <div class="team-block__member">
+                  <%= image_tag("hyejin.jpg", :class => "team-block__img") %>
+                  <p class="team-block__name">Hyejin Sim</p>
+                  <p class="team-block__job"></p>
+            </div>
+            <div class="team-block__member">
+                <%= image_tag("nadia.jpg", :class => "team-block__img") %>
+                <p class="team-block__name">Nadia Bunyamin</p>
+                <p class="team-block__job"></p>
+            </div>
+        </div>
+    </div>
+    
+</div>

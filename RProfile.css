@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+
+/*----------------------GLOBAL---------------------------------------*/
+* {
+    border-radius: 10px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url(https://www.bruinmeet.com/e489743307e8fec56829b95a3400fd06.svg);
+    background-repeat: no-repeat;
+}
+
+#page-body {
+    padding: 0px;
+}
+
+/*-----------------------NAVBAR-------------------------------------*/
+.navbar {
+    display: block;
+    border-radius: 0px;
+    border-bottom: 6px solid white;
+    margin: 0px;
+}
+
+.navbar-brand {
+    font-family: 'Roboto Slab', serif;
+}
+
+.navbar-brand:hover {
+    color: lightblue;
+}
+
+.nav-white {
+    color: #fff;
+}
+
+/*----------------------AD---------------------------------------*/
+#ad {
+    background: transparent !important;
+    height: 100%;
+    position: fixed;
+    right: 0px;
+}
+
+
+
+/*--------------------JUMBOTRON----------------------------------*/
+.jumbotron {
+    width: 100%;
+    display: block;
+    background: transparent;
+}
+
+#jumbotron-wrapper {
+    padding: 0px;
+}
+
+/*-------------------COLLAPSE------------------------------------*/
+
+#collapse-wrapper {
+    background-color: #eee;
+    padding: 16px 7%;
+    margin: 5px;
+}
+
+#listings {
+    background-color: coral;
+}
+
+.btn-profile-changing {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 2px;
+    text-transform: uppercase;
+    display: block;
+}
+
+
+
+.no-padding {
+    padding: 0px !important;
+}
+
+#postings {
+    margin: 10px;
+    background-color: #eee;
+}
+
+#ad {
+    background-color: #eee;
+}
+
+.footer-list {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.panel:hover {
+    box-shadow: 5px 0px 40px rgba(0, 0, 0, .2);
+}

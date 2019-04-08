@@ -1,0 +1,275 @@
+<%= render 'layouts/header', back: false %>
+
+<!-- This element is necessary to pass information about the current user to JavaScript runnng for filter. -->
+<span class='no-show-info' id="current-user-email"><%= current_user.email if current_user %></span>
+
+<div class="container-fluid" id="page-body">
+
+    <!--Jumbotron-->
+    <div class="container-fluid" id="jumbotron-wrapper">
+        <div class="jumbotron sharp-border" id="box-color">
+            <div class="row">
+                <!--Profile Information-->
+                <div class="col-lg-8 col-md-8 header-info">
+                    <% if current_user %>
+                            <h1>
+                                <mark>
+                                    <%= current_user.first_name %>
+                                    <%= current_user.last_name %>
+                                </mark>
+                            </h1>
+                            <h4>
+                                <mark>
+                                    <%= current_user.email %></h4>
+                                </mark>    
+                            </h4>
+                    <% else %>
+                    <h1><mark>Find studies</mark> </h1>
+                    <h4><mark>and earn for your participation.</mark></h4>
+                    <% end %>
+
+                    </p>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="col-lg-4 col-md-4 text-right text-middle">
+
+                    <% if current_user %>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="/study/new">
+                                    <button class="btn btn-lg btn-outline-light sharp-border button-new">
+                                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                        New Posting
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="/users/edit/<%= current_user.id %>">
+                                    <button class="btn btn-lg btn-outline-warning sharp-border button-edit">
+                                        <i class="fas fa-user-edit"></i> Edit Profile
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Filter-->
+    <div class="container-fluid filter-container">
+        <h4 class="heading">Filter to your preferences</h4>
+        <form method="post">
+            <!-- Radio Buttons and Checkboxes -->
+            <fieldset>
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-4">
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="gridRadios" id="radio-male"
+                                value="male">
+                            <label class="custom-control-label" for="radio-male">
+                                Male
+                            </label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="gridRadios" id="radio-female"
+                                value="female">
+                            <label class="custom-control-label" for="radio-female">
+                                Female
+                            </label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="gridRadios" id="radio-unspecified"
+                                value="unspecified" checked>
+                            <label class="custom-control-label" for="radio-unspecified">
+                                Unspecified
+                            </label>
+                        </div>
+                    </div>
+         
+                    <div class="col-form-label col-sm-2 pt-0">Conditions</div>
+                    <div class="col-sm-4">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="check-ucla">
+                            <label class="custom-control-label" for="check-ucla">
+                                UCLA Students only
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="check-app">
+                            <label class="custom-control-label" for="check-app">
+                                Show only mobile app studies
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="check-no-medical">
+                            <label class="custom-control-label" for="check-no-medical">
+                                Exclude medication studies
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="check-my-studies">
+                            <label class="custom-control-label" for="check-my-studies">
+                                Show only studies I have added
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <!-- Sliders -->
+            <div class="form-group row">
+                <div class="col-sm-6 col-form-label py-0">
+                    <label for="slider-price" id="slider-pay-label">Minimum Pay: $0</label>
+                    <input type="range" min="0" max="100" class="custom-range" id="slider-pay" oninput="sliderPriceChanged()">
+   
+                </div>
+                <div class="col-sm-6 col-form-label py-0">
+                    <label for="slider-age" id="slider-age-label">Age: 20 years</label>
+                    <input type="range" class="custom-range" min="0" max="81" id="slider-age" oninput="sliderAgeChanged()">
+
+                </div>
+            </div>
+
+            <!--Filter Buttons -->
+            <div class="filter-button-container">
+                <div class="dropdown d-inline mx-2">
+                    <button type="button" class="btn btn-primary dropdown-toggle sharp-border" data-toggle="dropdown">
+                        Sorted by <%= @sortedBy %>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/study/index?sort=date-r">Sort by Date (Newest First)</a>
+                        <a class="dropdown-item" href="/study/index?sort=date">Sort by Date (Oldest First)</a>
+                        <a class="dropdown-item" href="/study/index?sort=pay-r">Sort by Pay (Highest First)</a>
+                        <a class="dropdown-item" href="/study/index?sort=pay">Sort by Pay (Lowest First)</a>
+                    </div>
+                </div> 
+                <button type="submit" class="btn btn-warning sharp-border mx-2"><i class="fas fa-sync"></i>
+                    Load from Profile</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success sharp-border ml-2" onclick="applyFilter()">
+                        <i class="fas fa-filter"></i>Apply Filter</button>
+                    <button type="button" class="btn btn-success sharp-border" id="remove-filter" onclick="removeFilter()">
+                       <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Listing group -->
+    <div class="container-fluid" id="postings">
+
+        <!--Postings heading-->
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="heading">Active Listings</h2>
+            </div>
+            <div class="col-md-6 sub-heading text-right">
+                <h5 id="number-of-listings">
+                    <%= @aStudy.length %> listing<% if @aStudy.length >= 2 %>s
+                    <% end %> available
+                </h5>
+            </div>
+        </div>
+
+        <!--A Listing Row-->
+        <div class="row">
+        <% count = 0 %>
+        <% @aStudy.each do |theStudy| %>
+
+            <div class="col-lg-4 col-md-6" id="postings-box-<%= count %>">
+                <!-- Do not distrub anything about the class below, or else filter
+                     might stop working properly -->
+                <div class="no-show-info" id="info-<%= count %>">
+                    <span id="postings-info-min-age"><%= theStudy.min_age %></span>
+                    <span id="postings-info-max-age"><%= theStudy.max_age %></span>
+                    <span id="postings-info-gender"><%= theStudy.gender %></span>
+                    <span id="postings-info-ucla"><%= theStudy.ucla_students %></span>
+                    <span id="postings-info-app"><%= theStudy.mobile_app %></span>
+                    <span id="postings-info-medical"><%= theStudy.no_medical %></span>
+                    <span id="postings-info-submitter"><%= theStudy.submitter_email %></span>
+                    <span id="postings-info-pay"><%= theStudy.money %></span>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>
+                            <%= theStudy.title %>
+                        </strong>
+                    </div>
+
+                    <div class="researcher-name">
+                        <%= theStudy.researcher_name %>
+                    </div>
+                    <div class="panel-body">
+                        <p> <% if theStudy.description.length > 60 %>
+                                <%= theStudy.description[0..60] %>...
+                            <% else %>
+                                <%= theStudy.description %>
+                            <% end %>
+                        </p>
+                    </div>
+
+                    <div class="panel-money">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <a href="/study/show/<%= theStudy.id %>"><button class="btn btn-outline-primary sharp-border btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> View</button></a>
+                                <% if !current_user.nil? && current_user.email == theStudy.submitter_email %>
+                                <a href="/study/edit/<%= theStudy.id %>"><button class="btn btn-outline-secondary sharp-border btn-sm">
+                                        <i class="fas fa-edit"></i> Edit</button></a>
+                                <% end %>
+                            </div>
+                            <div class="col-sm-5 text-right"> 
+                                <% if theStudy.money > 999.0 %>
+                                    <i class="fas fa-caret-up"></i> $1k 
+                                <% else %>
+                                    $<%= theStudy.money %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <% count += 1 %>
+        <% end %>
+        </div>
+    </div>
+
+</div>
+
+<% if @noAuthType %>
+<!-- Modal to slap when someone tries inauthorized access -->
+<!-- or give a friendly message -->
+<div class="modal fade" id="noAuthModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content sharp-border">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <%= @noAuthType[0] == '-' ? 'Action Completed' : 'Inauthorized Access' %>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="no-auth-modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn <%= @noAuthType[0] == '-' ? 'btn-primary' : 'btn-danger' %> sharp-border" data-dismiss="modal">
+                    <%= @noAuthType[0] == '-' ? 'Close' : 'I will not do that again' %>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= javascript_tag "handleAuth('#{@noAuthType}')" -%>
+<% end %>
+

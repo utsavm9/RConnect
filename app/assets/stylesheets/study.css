@@ -1,0 +1,269 @@
+@import url( 'https://fonts.googleapis.com/css?family=Comfortaa:700|Nunito+Sans:400,800');
+
+/*----------------------GLOBAL---------------------------------------*/
+.sharp-border {
+  border-radius: 0 !important;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif !important;
+}
+
+#page-body {
+  padding: 0;
+}
+
+.subtitle {
+  color: black;
+  font-size: 40px;
+}
+
+/*-----------------------NAVBAR-------------------------------------*/
+nav {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.navbar-brand {
+  font-family: 'Comfortaa', cursive;
+  font-weight: 700;
+  font-size: 25px;
+  transition-duration: 300ms;
+}
+
+.navbar-brand:hover {
+  color: blueviolet !important;
+  transition-duration: 300ms;
+}
+
+.navbar-brand:hover > #navbar-R {
+  color: lightsalmon !important;
+  transition-duration: 300ms;
+}
+
+#navbar-R {
+  transition-duration: 300ms;
+}
+
+.form-inline > a > .btn {
+  margin-left: 13px;
+}
+@media screen and (min-width: 1000px) {
+  nav {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+  }
+}
+
+/*--------------------JUMBOTRON----------------------------------*/
+
+#box-color {
+  background-image: url("back.svg");
+  background-repeat: no-repeat;
+  background-color: rgba(84, 79, 123, 1);
+  background-position: left bottom;
+  background-size: 900px;
+
+}
+
+#jumbotron-wrapper {
+  padding: 0;
+}
+@media screen and (min-width: 1000px) {
+  .jumbotron {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+  }
+}
+
+.header-info > h1 {
+  font-weight: 800;
+  line-height: 1.7em;
+}
+
+.header-info > * > mark {
+  background-color: rgba(6, 3, 61, 0.90);
+  padding: 6px 20px;
+  color: white;
+}
+
+.text-middle {
+  margin: auto;
+}
+
+/*------------------------SIDE-BUTTON-----------------------*/
+.button-edit {
+  margin: 5px auto;
+  width: 100%;
+}
+
+.button-new {
+  margin: 5px auto;
+  width: 100%;
+  color: aqua;
+  border-color: aqua;
+}
+
+.button-new:hover {
+  color: black;
+  background-color: aqua;
+}
+
+/*-----------------------------FILTER------------------------------*/
+@media screen and (min-width: 1000px) {
+  .filter-container {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+  }
+}
+
+.filter-container {
+  margin-bottom: 30px;
+  padding: 0 2rem;
+  font-size: 18px;
+}
+
+.heading {
+  font-weight: 800;
+  margin: 20px auto;
+}
+
+.col-form-label {
+  font-weight: 800;
+}
+
+.filter-button-container {
+    margin: auto;
+    text-align: center;
+}
+
+.no-show-info {
+  display: none;
+}
+
+#remove-filter {
+    display: none;
+}
+
+/*-------------------LISTINGS-CONTAINER------------------------------------*/
+
+#postings {
+  background-color: #E6F4F8;
+  padding: 2rem;
+  padding-bottom: 50px;
+}
+
+@media screen and (min-width: 1000px) {
+  #postings {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+  }
+}
+
+.sub-heading {
+  font-weight: 400;
+  padding: 0;
+  margin: auto;
+  color: gray;
+}
+
+/*------------------------LISITNG-BOX-----------------------------*/
+
+.panel {
+  background-color: white;
+  border-top-width: 7px;
+  border-top-color: #69639a;
+  border-top-style: solid;
+  transition: .2s ease-in;
+  padding: 20px;
+  margin-top: 20px !important;
+}
+
+.panel:hover {
+  transition: .2s ease-in;
+  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.087);
+}
+
+.panel-heading {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  margin-bottom: .625rem;
+}
+
+.researcher-name {
+    color: blueviolet;
+    font-weight: 800;
+}
+
+.panel-body {
+    padding-top: 10px;
+    color: grey;
+    line-height: 1.5;
+}
+
+.panel-money {
+    color: rgb(141, 105, 13);
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+/*------------------FOOTER--------------------------------*/
+
+a:hover {
+    text-decoration: none;
+}
+
+@media screen and (min-width: 1000px) {
+    .footer-list {
+        padding-left: 100px !important;
+        padding-right: 100px !important;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .footer-list {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+code {
+    color: black;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.footer-list {
+    background-image: url(likelion.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: transparent;
+}
+
+.a-link:hover {
+    text-decoration: none;
+}
+
+/*-----Dear person who inserted this code below--------------*/
+/*I am a psycopath and I know where you live. So, make your code readable with comments ----*/
+
+.team-block {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 1.2rem;
+}
+
+.team-block__img {
+  border-radius: 100%;
+  object-fit: container;
+  margin-bottom: 1rem;
+  width: 15vw;
+}
+
+.team-block__name {
+  color: #FF8500;
+  font-weight: 700;
+  text-transform: uppercase;
+}

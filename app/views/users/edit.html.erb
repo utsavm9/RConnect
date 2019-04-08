@@ -1,0 +1,115 @@
+<%= render 'layouts/header', back: true %>
+
+<!-- User profile -->
+<div class="text-middle" id="postings">
+    <div class="panel-wide">
+        <div class="panel-heading">
+            <strong>
+                Edit user profile
+            </strong>
+        </div>
+
+        <form action="/users/update/<%= @user.id %>">
+            
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="input_first_name" >First Name</label>
+                        <input type="text" name="input_first_name" class="form-control" value="<%= @user.first_name %>" required/>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="input_last_name" >Last Name</label>
+                        <input type="text" name="input_last_name" class="form-control" value="<%= @user.last_name %>" required/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email</span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="Email" name="input_email" value="<%= @user.email %>" readonly/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Date of Birth</span>
+                    </div>
+                    <input type="date" class="form-control" name="input_age" value="<%= @user.age %>" required />
+                </div>
+            </div>
+            
+            <!-- Preferences -->
+            <fieldset class="border px-4">
+                <legend class="col-form-label w-auto">User Preferences</legend>                
+
+                <fieldset>
+                    <label>Select preferred gender:</label>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="input_gender" id="radio-male" <%= 'checked' if @user.gender == 'male' %>
+                            value="male" >
+                        <label class="custom-control-label" for="radio-male">
+                            Show studies asking for male participants
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="input_gender" id="radio-female" <%= 'checked' if @user.gender == 'female' %>
+                            value="female"  >
+                        <label class="custom-control-label" for="radio-female">
+                            Show studies asking for female participants
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" name="input_gender" id="radio-unspecified" <%= 'checked' if @user.gender == 'unspecified' %>
+                            value="unspecified" >
+                        <label class="custom-control-label" for="radio-unspecified">
+                            No preference
+                        </label>
+                    </div>
+                </fieldset>
+                
+                
+                <fieldset class="my-4">
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="check-ucla" name="input_if_ucla" <%= 'checked' if @user.ucla_students %> >
+                        <label class="custom-control-label" for="check-ucla">
+                            Show studies accepting only UCLA Students
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="check-app" name="input_if_app" <%= 'checked' if @user.mobile_app %> >
+                        <label class="custom-control-label" for="check-app">
+                            Show studies involving only a mobile app
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="check-no-medical" name="input_if_medical" <%= 'checked' if @user.no_medical %> >
+                        <label class="custom-control-label" for="check-no-medical">
+                            Remove studies involving administration of drugs, vaccines or blood draws from participant
+                        </label>
+                    </div>
+                </fieldset>
+                
+            </fieldset>
+            
+            <br/>
+
+            <div class="btn-center">
+                <a href="/user/destroy/<%= @user.id %>"><button class="btn btn-danger sharp-border mx-2">
+                        <i class="fa fa-trash"></i>  
+                        Delete profile
+                    </button></a>
+                <input type="submit" class="btn btn-primary sharp-border mx-2" value="Save Changes">
+                <a href="/study/index?message=-no-uedit"><button class="btn btn-warning sharp-border mx-2">
+                        <i class="fas fa-eraser"></i> 
+                        Discard Changes
+                    </button></a>
+            </div>
+        </form>
+    </div>
+</div>
